@@ -23,11 +23,12 @@ fetchDataBtn.classList.add("content__fetch-btn");
 fetchDataBtn.textContent = "Fetch Data";
 content.append(fetchDataBtn);
 fetchDataBtn.addEventListener("click", () => {
-  let newUrl = "https://rickandmortyapi.com/api/character/";
+  let newUrl = setUrl("https://rickandmortyapi.com/api/character/");
   fetchCharList(newUrl);
 });
 
-function fetchCharList(newUrl) {
+function fetchCharList() {
+  const newUrl = getUrl();
   fetch(newUrl)
     .then((resp) => resp.json())
     .then((data) => {
@@ -82,4 +83,22 @@ function getChars(url) {
     .catch((error) => {
       console.log(error);
     });
+}
+
+function setUrl(newUrl) {
+  try {
+    localStorage.setItem("currentUrl", JSON.stringify(newUrl));
+  } catch (error) {
+    console.log(error);
+    alert("There was an error while saving current Url");
+  }
+}
+
+function getUrl() {
+  let currentUrl = JSON.parse(localStorage.getItem("currentUrl"));
+  if (currentUrl === null) {
+    currentUrl = [];
+  }
+
+  return currentUrl;
 }
