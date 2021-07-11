@@ -32,6 +32,12 @@ formElemenrDetchDataBtn.addEventListener("submit", (event) => {
   } else if (formElemenrDetchDataBtn.status.value === "Unknown") {
     url = `${url}?status=unknown`;
   }
+
+  if (formElemenrDetchDataBtn.status.value === "All") {
+    url = `${url}?name=${formElemenrDetchDataBtn.name.value}`;
+  } else {
+    url = `${url}&name=${formElemenrDetchDataBtn.name.value}`;
+  }
   setUrl(url);
   clearCharList();
   fetchCharList();
