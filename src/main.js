@@ -1,16 +1,17 @@
-const url = "https://rickandmortyapi.com/api/character/";
-
 const content = document.querySelector(".content");
+
+//==============Load next page if scroll at bottom==
+
 window.addEventListener("scroll", () => {
   if (window.innerHeight + window.pageYOffset >= document.body.offsetHeight) {
-    console.log("miau");
-
-    fetch(url)
+    let newUrl = getUrl();
+    fetch(newUrl)
       .then((resp) => resp.json())
       .then((data) => {
         //throw new Error("An error occured");
         const nextPage = data.info.next; //info is name of array from api results
-        getChars(nextPage);
+        setUrl(nextPage);
+        fetchCharList();
       })
       .catch((error) => {
         console.log(error);
@@ -18,14 +19,31 @@ window.addEventListener("scroll", () => {
   }
 });
 
-const fetchDataBtn = document.createElement("button");
-fetchDataBtn.classList.add("content__fetch-btn");
-fetchDataBtn.textContent = "Fetch Data";
-content.append(fetchDataBtn);
-fetchDataBtn.addEventListener("click", () => {
-  let newUrl = setUrl("https://rickandmortyapi.com/api/character/");
-  fetchCharList(newUrl);
+//===============Create fetch data button===
+
+const formElemenrDetchDataBtn = document.querySelector(".search__filter");
+formElemenrDetchDataBtn.addEventListener("submit", (event) => {
+  event.preventDefault();
+  let url = "https://rickandmortyapi.com/api/character/";
+  if (formElemenrDetchDataBtn.status.value === "Alive") {
+    url = `${url}?status=alive`;
+  } else if (formElemenrDetchDataBtn.status.value === "Dead") {
+    url = `${url}?status=dead`;
+  } else if (formElemenrDetchDataBtn.status.value === "Unknown") {
+    url = `${url}?status=unknown`;
+  }
+
+  if (formElemenrDetchDataBtn.status.value === "All") {
+    url = `${url}?name=${formElemenrDetchDataBtn.name.value}`;
+  } else {
+    url = `${url}&name=${formElemenrDetchDataBtn.name.value}`;
+  }
+  setUrl(url);
+  clearCharList();
+  fetchCharList();
 });
+
+//=============Fetch data of character list====
 
 function fetchCharList() {
   const newUrl = getUrl();
@@ -41,8 +59,12 @@ function fetchCharList() {
     });
 }
 
+//==============Create character cards===
+
 function createCharCards(characterList) {
   console.log(characterList);
+  const divWrapper = document.createElement("div");
+  divWrapper.classList.add("content__wrapper");
   characterList.map((character) => {
     const section = document.createElement("section");
     section.classList.add("character");
@@ -55,34 +77,22 @@ function createCharCards(characterList) {
     img.alt = `Picture of ${character.name}`;
     section.append(h2);
     section.append(img);
-    content.append(section);
+    divWrapper.append(section);
   });
+  content.append(divWrapper);
+  content.classList.add("content--filled");
 }
 
-function getChars(url) {
-  fetch(url)
-    .then((resp) => resp.json())
-    .then((data) => {
-      //throw new Error("An error occured");
-      const characterList = data.results; //results is name of array from api results
-      characterList.map((character) => {
-        const section = document.createElement("section");
-        section.classList.add("character");
+//===================clear character list===
 
-        const h2 = document.createElement("h2");
-        h2.textContent = character.name;
-
-        const img = document.createElement("img");
-        img.src = character.image;
-        img.alt = `Picture of ${character.name}`;
-        section.append(h2);
-        section.append(img);
-        content.append(section);
-      });
-    })
-    .catch((error) => {
-      console.log(error);
+function clearCharList() {
+  const divWrapper = document.querySelectorAll(".content__wrapper");
+  if (content.classList.contains("content--filled")) {
+    content.classList.remove("content--filled"); //if 404, class would still be "content-filled", but no div exists. That is why it needs to be removed as well!
+    divWrapper.forEach((div) => {
+      div.remove();
     });
+  }
 }
 
 function setUrl(newUrl) {
