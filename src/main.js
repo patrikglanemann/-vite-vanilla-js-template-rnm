@@ -1,10 +1,9 @@
+const content = document.querySelector(".content");
+
 //==============Load next page if scroll at bottom==
 
-const content = document.querySelector(".content");
 window.addEventListener("scroll", () => {
   if (window.innerHeight + window.pageYOffset >= document.body.offsetHeight) {
-    console.log("miau");
-
     let newUrl = getUrl();
     fetch(newUrl)
       .then((resp) => resp.json())
@@ -25,7 +24,14 @@ window.addEventListener("scroll", () => {
 const formElemenrDetchDataBtn = document.querySelector(".search__filter");
 formElemenrDetchDataBtn.addEventListener("submit", (event) => {
   event.preventDefault();
-  setUrl("https://rickandmortyapi.com/api/character/");
+  let url = "https://rickandmortyapi.com/api/character/";
+  if (formElemenrDetchDataBtn.toggle.checked === true) {
+    url = `${url}?status=alive`;
+  } else {
+    url = `${url}?status=dead`;
+  }
+  setUrl(url);
+  clearCharList();
   fetchCharList();
 });
 
@@ -45,10 +51,12 @@ function fetchCharList() {
     });
 }
 
-//==============Crete character cards===
+//==============Create character cards===
 
 function createCharCards(characterList) {
   console.log(characterList);
+  const divWrapper = document.createElement("div");
+  divWrapper.classList.add("content__wrapper");
   characterList.map((character) => {
     const section = document.createElement("section");
     section.classList.add("character");
@@ -61,8 +69,22 @@ function createCharCards(characterList) {
     img.alt = `Picture of ${character.name}`;
     section.append(h2);
     section.append(img);
-    content.append(section);
+    divWrapper.append(section);
   });
+  content.append(divWrapper);
+  content.classList.add("content--filled");
+}
+
+//===================clear character list===
+
+function clearCharList() {
+  const divWrapper = document.querySelectorAll(".content__wrapper");
+  if (content.classList.contains("content--filled")) {
+    content.classList.remove("content--filled"); //if 404, class would still be "content-filled", but no div exists. That is why it needs to be removed as well!
+    divWrapper.forEach((div) => {
+      div.remove();
+    });
+  }
 }
 
 function setUrl(newUrl) {
