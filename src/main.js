@@ -22,11 +22,9 @@ window.addEventListener("scroll", () => {
 
 //===============Create fetch data button===
 
-const fetchDataBtn = document.createElement("button");
-fetchDataBtn.classList.add("content__fetch-btn");
-fetchDataBtn.textContent = "Fetch Data";
-content.append(fetchDataBtn);
-fetchDataBtn.addEventListener("click", () => {
+const formElemenrDetchDataBtn = document.querySelector(".search__filter");
+formElemenrDetchDataBtn.addEventListener("submit", (event) => {
+  event.preventDefault();
   setUrl("https://rickandmortyapi.com/api/character/");
   fetchCharList();
 });
