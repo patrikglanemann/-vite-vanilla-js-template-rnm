@@ -35,5 +35,11 @@
 }
 
 .footer {
+  display: flex;
+  justify-content: center;
   background-color: cadetblue;
+}
+
+.footer__banner {
+  height: 80px;
 }
