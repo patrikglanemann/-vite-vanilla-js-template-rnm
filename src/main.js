@@ -1,16 +1,18 @@
-const url = "https://rickandmortyapi.com/api/character/";
+//==============Load next page if scroll at bottom==
 
 const content = document.querySelector(".content");
 window.addEventListener("scroll", () => {
   if (window.innerHeight + window.pageYOffset >= document.body.offsetHeight) {
     console.log("miau");
 
-    fetch(url)
+    let newUrl = getUrl();
+    fetch(newUrl)
       .then((resp) => resp.json())
       .then((data) => {
         //throw new Error("An error occured");
         const nextPage = data.info.next; //info is name of array from api results
-        getChars(nextPage);
+        setUrl(nextPage);
+        fetchCharList();
       })
       .catch((error) => {
         console.log(error);
@@ -18,14 +20,18 @@ window.addEventListener("scroll", () => {
   }
 });
 
+//===============Create fetch data button===
+
 const fetchDataBtn = document.createElement("button");
 fetchDataBtn.classList.add("content__fetch-btn");
 fetchDataBtn.textContent = "Fetch Data";
 content.append(fetchDataBtn);
 fetchDataBtn.addEventListener("click", () => {
-  let newUrl = setUrl("https://rickandmortyapi.com/api/character/");
-  fetchCharList(newUrl);
+  setUrl("https://rickandmortyapi.com/api/character/");
+  fetchCharList();
 });
+
+//=============Fetch data of character list====
 
 function fetchCharList() {
   const newUrl = getUrl();
@@ -40,6 +46,8 @@ function fetchCharList() {
       console.log(error);
     });
 }
+
+//==============Crete character cards===
 
 function createCharCards(characterList) {
   console.log(characterList);
@@ -57,32 +65,6 @@ function createCharCards(characterList) {
     section.append(img);
     content.append(section);
   });
-}
-
-function getChars(url) {
-  fetch(url)
-    .then((resp) => resp.json())
-    .then((data) => {
-      //throw new Error("An error occured");
-      const characterList = data.results; //results is name of array from api results
-      characterList.map((character) => {
-        const section = document.createElement("section");
-        section.classList.add("character");
-
-        const h2 = document.createElement("h2");
-        h2.textContent = character.name;
-
-        const img = document.createElement("img");
-        img.src = character.image;
-        img.alt = `Picture of ${character.name}`;
-        section.append(h2);
-        section.append(img);
-        content.append(section);
-      });
-    })
-    .catch((error) => {
-      console.log(error);
-    });
 }
 
 function setUrl(newUrl) {
