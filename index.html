@@ -12,7 +12,12 @@
     <header>
       <h1 class="header__title"></h1>
       <form class="search__filter">
-        <label for="toggle">Alive</label>
+        <label for="status">Status:</label>
+        <select name="status" id="status" value="Status">
+          <option value="All">All</option>
+          <option value="Alive">Alive</option>
+          <option value="Dead">Dead</option>
+        </select>
         <input type="checkbox" id="toggle" name="toggle" checked />
         <button class="search__fetch-data-btn" type="submit">Fetch Data</button>
       </form>

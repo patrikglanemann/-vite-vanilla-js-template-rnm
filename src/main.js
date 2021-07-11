@@ -25,9 +25,9 @@ const formElemenrDetchDataBtn = document.querySelector(".search__filter");
 formElemenrDetchDataBtn.addEventListener("submit", (event) => {
   event.preventDefault();
   let url = "https://rickandmortyapi.com/api/character/";
-  if (formElemenrDetchDataBtn.toggle.checked === true) {
+  if (formElemenrDetchDataBtn.status.value === "Alive") {
     url = `${url}?status=alive`;
-  } else {
+  } else if (formElemenrDetchDataBtn.status.value === "Dead") {
     url = `${url}?status=dead`;
   }
   setUrl(url);
