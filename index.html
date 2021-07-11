@@ -8,8 +8,13 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <title>Rick and Morty App</title>
   </head>
-  <body>
-    <header>
+  <body class="outer-grid">
+    <header class="header">
+      <img
+        class="header__logo"
+        src="./src/material/rickandmortylogo.png"
+        alt="Logo of Rick and Morty App"
+      />
       <h1 class="header__title"></h1>
       <form class="search__filter">
         <label for="status">Status:</label>
@@ -20,11 +25,18 @@
           <option value="Unknown">Unknown</option>
         </select>
         <input type="text" name="name" id="name" placeholder="Search by Name" />
-        <button class="search__fetch-data-btn" type="submit">Fetch Data</button>
+        <button class="search__fetch-data-btn" type="submit">Go</button>
       </form>
     </header>
     <main class="content"></main>
-    <footer></footer>
+    <footer class="footer">
+      <img
+        class="footer__banner"
+        src="./src/material/rickandmortybanner.png"
+        alt="Banner of Rick and Morty lettering
+      "
+      />
+    </footer>
     <script type="module" src="/src/main.js"></script>
   </body>
 </html>
