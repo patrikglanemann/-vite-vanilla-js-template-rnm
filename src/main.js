@@ -2,8 +2,11 @@ const content = document.querySelector(".content");
 
 //==============Load next page if scroll at bottom==
 
-window.addEventListener("scroll", () => {
-  if (window.innerHeight + window.pageYOffset >= document.body.offsetHeight) {
+content.addEventListener("scroll", () => {
+  if (
+    document.body.offsetHeight + content.scrollTop - 160 >=
+    content.scrollHeight
+  ) {
     let newUrl = getUrl();
     fetch(newUrl)
       .then((resp) => resp.json())
