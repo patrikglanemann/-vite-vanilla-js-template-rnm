@@ -67,7 +67,7 @@ function createCharCards(characterList) {
   divWrapper.classList.add("content__wrapper");
   characterList.map((character) => {
     const section = document.createElement("section");
-    section.classList.add("character");
+    section.classList.add("character-card");
 
     const h2 = document.createElement("h2");
     h2.textContent = character.name;
@@ -75,8 +75,8 @@ function createCharCards(characterList) {
     const img = document.createElement("img");
     img.src = character.image;
     img.alt = `Picture of ${character.name}`;
-    section.append(h2);
     section.append(img);
+    section.append(h2);
     divWrapper.append(section);
   });
   content.append(divWrapper);
