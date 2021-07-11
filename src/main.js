@@ -1,6 +1,6 @@
 const content = document.querySelector(".content");
 
-//==============Load next page if scroll at bottom==
+//==============Load next page if scroll at bottom===
 
 content.addEventListener("scroll", () => {
   if (
