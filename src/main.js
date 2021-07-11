@@ -62,12 +62,19 @@ function fetchCharList() {
 //==============Create character cards===
 
 function createCharCards(characterList) {
-  console.log(characterList);
   const divWrapper = document.createElement("div");
   divWrapper.classList.add("content__wrapper");
+
   characterList.map((character) => {
     const section = document.createElement("section");
     section.classList.add("character-card");
+    if (character.status === "Alive") {
+      section.style.backgroundColor = "rgba(58, 150, 107, 0.658)";
+    } else if (character.status === "Dead") {
+      section.style.backgroundColor = "rgba(150, 58, 58, 0.658)";
+    } else {
+      section.style.backgroundColor = "rgba(142, 150, 146, 0.658)";
+    }
 
     const h2 = document.createElement("h2");
     h2.classList.add("character-card__name");
