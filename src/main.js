@@ -70,9 +70,11 @@ function createCharCards(characterList) {
     section.classList.add("character-card");
 
     const h2 = document.createElement("h2");
+    h2.classList.add("character-card__name");
     h2.textContent = character.name;
 
     const img = document.createElement("img");
+    img.classList.add("character-card__image");
     img.src = character.image;
     img.alt = `Picture of ${character.name}`;
     section.append(img);
