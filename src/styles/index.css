@@ -83,6 +83,11 @@
 }
 .character-card {
   padding: 20px 15px;
+  margin-bottom: 30px;
+  border-radius: 20px;
+  box-shadow: 13px 12px 13px 0px rgba(100, 100, 100, 0.8);
+  -webkit-box-shadow: 13px 12px 13px 0px rgba(100, 100, 100, 0.8);
+  -moz-box-shadow: 13px 12px 13px 0px rgba(100, 100, 100, 0.8);
 }
 
 .character-card__name {
