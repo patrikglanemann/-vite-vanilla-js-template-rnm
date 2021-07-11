@@ -29,6 +29,8 @@ formElemenrDetchDataBtn.addEventListener("submit", (event) => {
     url = `${url}?status=alive`;
   } else if (formElemenrDetchDataBtn.status.value === "Dead") {
     url = `${url}?status=dead`;
+  } else if (formElemenrDetchDataBtn.status.value === "Unknown") {
+    url = `${url}?status=unknown`;
   }
   setUrl(url);
   clearCharList();
