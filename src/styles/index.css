@@ -19,9 +19,43 @@
   text-align: center;
 }
 
+.search__filter {
+  margin-left: 100px;
+}
+
+.search__filter > label {
+  margin-bottom: 5px;
+}
+
+.search__filter > select {
+  margin-bottom: 5px;
+  margin-right: 5px;
+  border: 1px solid black;
+}
+
+.search__filter > input {
+  margin-top: 5px;
+  margin-right: 5px;
+  border: 1px solid black;
+  outline: none;
+}
+
+.search__filter > button {
+  padding: 0.5em 1.5em;
+  border: 1px solid black;
+  border-radius: 0.12em;
+  background-color: mediumseagreen;
+  text-align: center;
+  transition: all 0.15s;
+}
+.search__filter > button:hover {
+  color: whitesmoke;
+  border-color: whitesmoke;
+}
 .header__logo {
+  position: absolute;
+  left: 0;
   height: 80px;
-  align-self: flex-end;
 }
 
 .content {
