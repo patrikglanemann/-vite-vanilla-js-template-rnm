@@ -1,9 +1,12 @@
 const content = document.querySelector(".content");
 
-//==============Load next page if scroll at bottom==
+//==============Load next page if scroll at bottom===
 
-window.addEventListener("scroll", () => {
-  if (window.innerHeight + window.pageYOffset >= document.body.offsetHeight) {
+content.addEventListener("scroll", () => {
+  if (
+    document.body.offsetHeight + content.scrollTop - 160 >=
+    content.scrollHeight
+  ) {
     let newUrl = getUrl();
     fetch(newUrl)
       .then((resp) => resp.json())
@@ -62,21 +65,30 @@ function fetchCharList() {
 //==============Create character cards===
 
 function createCharCards(characterList) {
-  console.log(characterList);
   const divWrapper = document.createElement("div");
   divWrapper.classList.add("content__wrapper");
+
   characterList.map((character) => {
     const section = document.createElement("section");
-    section.classList.add("character");
+    section.classList.add("character-card");
+    if (character.status === "Alive") {
+      section.style.backgroundColor = "rgba(58, 150, 107, 0.658)";
+    } else if (character.status === "Dead") {
+      section.style.backgroundColor = "rgba(150, 58, 58, 0.658)";
+    } else {
+      section.style.backgroundColor = "rgba(142, 150, 146, 0.658)";
+    }
 
     const h2 = document.createElement("h2");
+    h2.classList.add("character-card__name");
     h2.textContent = character.name;
 
     const img = document.createElement("img");
+    img.classList.add("character-card__image");
     img.src = character.image;
     img.alt = `Picture of ${character.name}`;
-    section.append(h2);
     section.append(img);
+    section.append(h2);
     divWrapper.append(section);
   });
   content.append(divWrapper);

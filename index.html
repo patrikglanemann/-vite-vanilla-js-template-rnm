@@ -17,14 +17,23 @@
       />
       <h1 class="header__title"></h1>
       <form class="search__filter">
-        <label for="status">Status:</label>
-        <select name="status" id="status" value="Status">
-          <option value="All">All</option>
-          <option value="Alive">Alive</option>
-          <option value="Dead">Dead</option>
-          <option value="Unknown">Unknown</option>
-        </select>
-        <input type="text" name="name" id="name" placeholder="Search by Name" />
+        <div class="search__filter__input">
+          <div class="search__filter__input__status">
+            <label for="status">Status:</label>
+            <select name="status" id="status" value="Status">
+              <option value="All">All</option>
+              <option value="Alive">Alive</option>
+              <option value="Dead">Dead</option>
+              <option value="Unknown">Unknown</option>
+            </select>
+          </div>
+          <input
+            type="text"
+            name="name"
+            id="name"
+            placeholder="Search by Name"
+          />
+        </div>
         <button class="search__fetch-data-btn" type="submit">Go</button>
       </form>
     </header>

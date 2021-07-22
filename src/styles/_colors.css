@@ -1,3 +1,6 @@
 :root {
-  /* Define your variable colors here */
+  --primary-color: cadetblue;
+  --secondary-color: rgb(208, 236, 233);
+  --primary-button-color: mediumseagreen;
+  --secondary-button-color: whitesmoke;
 }
